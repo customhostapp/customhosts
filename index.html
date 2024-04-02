@@ -60,12 +60,22 @@
   </div>
 
   <script>
+    // Check if panel should be hidden or shown on page load
+    document.addEventListener("DOMContentLoaded", function() {
+      var panel = document.getElementById('myPanel');
+      if (localStorage.getItem('panelVisible') === 'true') {
+        panel.style.display = 'block';
+      }
+    });
+
     function togglePanel() {
       var panel = document.getElementById('myPanel');
       if (panel.style.display === 'none') {
         panel.style.display = 'block';
+        localStorage.setItem('panelVisible', 'true');
       } else {
         panel.style.display = 'none';
+        localStorage.setItem('panelVisible', 'false');
       }
     }
   </script>
