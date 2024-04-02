@@ -57,6 +57,21 @@
     .close-btn {
       cursor: pointer;
     }
+
+     .new-panel {
+     display: none;
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     width: 80%; /* Adjust width as needed */
+     max-width: 600px; /* Adjust max-width as needed */
+     max-height: 80%; /* Adjust max-height as needed */
+     overflow-y: scroll; /* Enable scrolling if content exceeds panel height */
+     background-color: rgba(177, 132, 96, 0.9); /* Semi-transparent white */
+     padding: 20px;
+    border-radius: 10px;
+   }
   </style>
 </head>
 <body>
@@ -71,6 +86,17 @@
       <p>RL (RoundLoss): No team shall go to a captured place during a battle, to get support, or move loot.</p>
     </div>
   </div>
+   <button id="newButton" onclick="toggleNewPanel()" style="margin-top: 50px;">New Panel</button>
+   <div class="new-panel" id="newPanel">
+   <div class="panel-header">
+     <div>- New Panel -</div>
+     <div class="close-btn" onclick="toggleNewPanel()">X</div>
+   </div>
+   <div class="panel-content">
+     <!-- Add your content for the new panel here -->
+     <p>This is the content of the new panel.</p>
+   </div>
+ </div>
 
   <script>
     // Check if panel should be hidden or shown on page load
@@ -100,6 +126,26 @@
     var panelHeight = panel.offsetHeight;
     panel.style.left = buttonRect.right + 250 + 'px'; // Adjust as needed
     panel.style.top = buttonRect.top + (button.offsetHeight - panelHeight) / 2 + 'px'; // Adjust as needed
+
+     function toggleNewPanel() {
+   var panel = document.getElementById('newPanel');
+   if (panel.style.display === 'none') {
+     panel.style.display = 'block';
+     localStorage.setItem('newPanelVisible', 'true');
+   } else {
+     panel.style.display = 'none';
+     localStorage.setItem('newPanelVisible', 'false');
+   }
+ }
+
+  // Calculate and set new panel position based on button position
+  var newButton = document.getElementById('newButton');
+  var newPanel = document.getElementById('newPanel');
+  var newButtonRect = newButton.getBoundingClientRect();
+  var newPanelWidth = newPanel.offsetWidth;
+  var newPanelHeight = newPanel.offsetHeight;
+  newPanel.style.left = newButtonRect.right + 15 + 'px'; // Adjust as needed
+  newPanel.style.top = newButtonRect.top + (newButton.offsetHeight - newPanelHeight) / 2 + 'px'; // Adjust as needed
   </script>
 </body>
 </html>
