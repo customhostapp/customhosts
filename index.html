@@ -36,7 +36,7 @@
       display: none;
       position: absolute;
       top: 50%;
-      left: 50%;
+      left: calc(100% + 10px); /* Position panel to the right of the button */
       transform: translate(-50%, -50%);
       width: 80%; /* Adjust width as needed */
       max-width: 600px; /* Adjust max-width as needed */
@@ -62,7 +62,7 @@
 <body>
   <button onclick="togglePanel()">Rules</button>
   <div class="panel" id="myPanel">
-    <div class="panel-header" onmousedown="startDragging(event)">
+    <div class="panel-header">
       <div>- Rules -</div>
       <div class="close-btn" onclick="togglePanel()">X</div>
     </div>
@@ -73,27 +73,6 @@
   </div>
 
   <script>
-    var offsetX, offsetY;
-
-    function startDragging(e) {
-      var panel = document.getElementById('myPanel');
-      offsetX = e.clientX - panel.getBoundingClientRect().left;
-      offsetY = e.clientY - panel.getBoundingClientRect().top;
-      document.addEventListener('mousemove', dragPanel);
-      document.addEventListener('mouseup', stopDragging);
-    }
-
-    function dragPanel(e) {
-      var panel = document.getElementById('myPanel');
-      panel.style.left = (e.clientX - offsetX) + 'px';
-      panel.style.top = (e.clientY - offsetY) + 'px';
-    }
-
-    function stopDragging() {
-      document.removeEventListener('mousemove', dragPanel);
-      document.removeEventListener('mouseup', stopDragging);
-    }
-
     // Check if panel should be hidden or shown on page load
     document.addEventListener("DOMContentLoaded", function() {
       var panel = document.getElementById('myPanel');
