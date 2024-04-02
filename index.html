@@ -34,20 +34,17 @@
 
     .panel {
       display: none;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 50vh; /* Adjust as needed */
-      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
-      z-index: 1000;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%; /* Adjust width as needed */
+      max-width: 600px; /* Adjust max-width as needed */
+      max-height: 80%; /* Adjust max-height as needed */
       overflow-y: scroll; /* Enable scrolling if content exceeds panel height */
-    }
-
-    .panel-content {
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
       padding: 20px;
-      text-align: center;
-      font-size: 24px;
+      border-radius: 10px;
     }
   </style>
 </head>
@@ -55,11 +52,10 @@
   <button onclick="togglePanel()">Rules</button>
   <div class="panel" id="myPanel">
     <div class="panel-content">
-      -Rules-
-      
-      1. NB (NoBlood): No CH tag shall be injured so much during a battle, that he/she will start blooding.
-
-      2. RL (RoundLoss): No team shall go to a captued place during a battle, to get support, or move loot.
+      <p>- Rules -</p>
+      </p></p>
+      <p>NB (NoBlood): No CH tag shall be injured so much during a battle, that he/she will start bleeding.</p>
+      <p>RL (RoundLoss): No team shall go to a captured place during a battle, to get support, or move loot.</p>
     </div>
   </div>
 
