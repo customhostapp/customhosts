@@ -36,7 +36,7 @@
       display: none;
       position: absolute;
       top: 50%;
-      left: calc(100% + 15px); /* Position panel to the right of the button with 15px margin */
+      left: 50%;
       transform: translate(-50%, -50%);
       width: 80%; /* Adjust width as needed */
       max-width: 600px; /* Adjust max-width as needed */
@@ -60,7 +60,7 @@
   </style>
 </head>
 <body>
-  <button onclick="togglePanel()">Rules</button>
+  <button id="rulesButton" onclick="togglePanel()">Rules</button>
   <div class="panel" id="myPanel">
     <div class="panel-header">
       <div>- Rules -</div>
@@ -91,6 +91,15 @@
         localStorage.setItem('panelVisible', 'false');
       }
     }
+
+    // Calculate and set panel position based on button position
+    var button = document.getElementById('rulesButton');
+    var panel = document.getElementById('myPanel');
+    var buttonRect = button.getBoundingClientRect();
+    var panelWidth = panel.offsetWidth;
+    var panelHeight = panel.offsetHeight;
+    panel.style.left = buttonRect.right + 15 + 'px'; // Adjust as needed
+    panel.style.top = buttonRect.top + (button.offsetHeight - panelHeight) / 2 + 'px'; // Adjust as needed
   </script>
 </body>
 </html>
