@@ -46,20 +46,54 @@
       padding: 20px;
       border-radius: 10px;
     }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .close-btn {
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <button onclick="togglePanel()">Rules</button>
   <div class="panel" id="myPanel">
+    <div class="panel-header" onmousedown="startDragging(event)">
+      <div>- Rules -</div>
+      <div class="close-btn" onclick="togglePanel()">X</div>
+    </div>
     <div class="panel-content">
-      <p>- Rules -</p>
-      </p></p>
       <p>NB (NoBlood): No CH tag shall be injured so much during a battle, that he/she will start bleeding.</p>
       <p>RL (RoundLoss): No team shall go to a captured place during a battle, to get support, or move loot.</p>
     </div>
   </div>
 
   <script>
+    var offsetX, offsetY;
+
+    function startDragging(e) {
+      var panel = document.getElementById('myPanel');
+      offsetX = e.clientX - panel.getBoundingClientRect().left;
+      offsetY = e.clientY - panel.getBoundingClientRect().top;
+      document.addEventListener('mousemove', dragPanel);
+      document.addEventListener('mouseup', stopDragging);
+    }
+
+    function dragPanel(e) {
+      var panel = document.getElementById('myPanel');
+      panel.style.left = (e.clientX - offsetX) + 'px';
+      panel.style.top = (e.clientY - offsetY) + 'px';
+    }
+
+    function stopDragging() {
+      document.removeEventListener('mousemove', dragPanel);
+      document.removeEventListener('mouseup', stopDragging);
+    }
+
     // Check if panel should be hidden or shown on page load
     document.addEventListener("DOMContentLoaded", function() {
       var panel = document.getElementById('myPanel');
