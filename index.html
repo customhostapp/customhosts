@@ -31,9 +31,43 @@
     button:hover {
       background-color: #45a049;
     }
+
+    .panel {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50vh; /* Adjust as needed */
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+      z-index: 1000;
+      overflow-y: scroll; /* Enable scrolling if content exceeds panel height */
+    }
+
+    .panel-content {
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+    }
   </style>
 </head>
 <body>
-  <button onclick="window.open('https://www.youtube.com')">Open YouTube</button>
+  <button onclick="togglePanel()">Show Panel</button>
+  <div class="panel" id="myPanel">
+    <div class="panel-content">
+      This is the panel content. You can edit this text in the HTML.
+    </div>
+  </div>
+
+  <script>
+    function togglePanel() {
+      var panel = document.getElementById('myPanel');
+      if (panel.style.display === 'none') {
+        panel.style.display = 'block';
+      } else {
+        panel.style.display = 'none';
+      }
+    }
+  </script>
 </body>
 </html>
