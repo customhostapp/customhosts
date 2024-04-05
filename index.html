@@ -1,102 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CustomHostApp</title>
-  <style>
-    body {
-      background-color: #333; /* Dark gray */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlobMC Gyorsweb</title>
+<style>
+body {
+    background-color: #333333; /* Dark Gray */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Align items vertically */
+    margin: 0; /* Remove default margin */
+    margin-bottom: 0; /* Add this line to remove bottom margin */
+}
 
-    .button-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px; /* Add padding around the container */
+    height: 100%; /* Set container height to 100% of viewport */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
 
-    button {
-      background-color: #E87C26; /* Orange */
-      border: none;
-      color: white;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin-bottom: 20px; /* Space between buttons */
-      cursor: pointer;
-      border-radius: 10px;
-    }
+.button {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0; /* Add margin between buttons */
+    cursor: pointer;
+    border-radius: 10px;
+}
 
-    button:hover {
-      background-color: #E6AB7C;
-    }
+.copy-button {
+    background-color: #CC3116; /* Red */
+}
 
-    .panel {
-      display: none;
-      position: absolute;
-      background-color: rgba(177, 132, 96, 0.9); /* Semi-transparent white */
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    #rulesPanel {
-      left: calc(100% + 50px); /* 20px gap from button */
-      top: 50%;
-      transform: translate(-100%, 3000%);
-    }
-
-    #newPanel {
-      left: calc(100% + 50px); /* 20px gap from button */
-      top: 50%;
-      transform: translate(-100%, 3000%);
-    }
-  </style>
+.webstore-button {
+    background-color: #E4B260; /* Orange */
+}
+</style>
 </head>
 <body>
-  <div class="button-container">
-    <button id="rulesButton" onclick="togglePanel()">Rules</button>
-    <div class="panel" id="rulesPanel">
-      <div class="panel-header">
-        <div>- Rules -</div>
-        <div class="close-btn" onclick="togglePanel()">X</div>
-      </div>
-      <div class="panel-content">
-        <p>NB (NoBlood): No CH tag shall be injured so much during a battle, that he/she will start bleeding.</p>
-        <p>RL (RoundLoss): No team shall go to a captured place during a battle, to get support, or move loot.</p>
-      </div>
-    </div>
-    <button id="newButton" onclick="toggleNewPanel()">New Panel</button>
-    <div class="panel" id="newPanel">
-      <div class="panel-header">
-        <div>- New Panel -</div>
-        <div class="close-btn" onclick="toggleNewPanel()">X</div>
-      </div>
-      <div class="panel-content">
-        <!-- Add your content for the new panel here -->
-        <p>This is the content of the new panel.</p>
-      </div>
-    </div>
-  </div>
 
-  <script>
-    function togglePanel() {
-      var panel = document.getElementById('rulesPanel');
-      panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-      localStorage.setItem('panelVisible', panel.style.display === 'block');
-    }
+<div class="container">
 
-    function toggleNewPanel() {
-      var panel = document.getElementById('newPanel');
-      panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-      localStorage.setItem('newPanelVisible', panel.style.display === 'block');
-    }
-  </script>
+    <!-- Button to trigger copying -->
+    <button class="button copy-button" onclick="copyBTN()">Szerver IP cím másolása</button>
+
+    <!-- Button to open webstore -->
+    <button class="button webstore-button" onclick="openWebstore()">BlobMC Webáruház</button>
+
+</div>
+
+</div>
+
+<script>
+
+// Function to copy server IP
+function copyBTN() {
+    var text = "195.228.230.105:25570";
+  
+    // Create a temporary text area element
+    var tempTextArea = document.createElement("textarea");
+    tempTextArea.value = serverIp;
+  
+    // Append the text area element to the body
+    document.body.appendChild(tempTextArea);
+  
+    // Select and copy the text from the text area element
+    tempTextArea.select();
+    document.execCommand("copy");
+  
+    // Remove the temporary text area element
+    document.body.removeChild(tempTextArea);
+  
+    // Alert the copied text
+    alert("BlobMC szerver IP másolva, illeszd be ahova akarod!");
+}
+
+// Function to open webstore
+function openWebstore() {
+    window.open("https://blobmc-bolt.tebex.io", "_blank");
+}
+
+</script>
 </body>
 </html>
