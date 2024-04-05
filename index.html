@@ -29,7 +29,7 @@
       text-decoration: none;
       display: inline-block;
       font-size: 16px;
-      margin: 20px 0; /* 20px margin between buttons */
+      margin-bottom: 20px; /* Space between buttons */
       cursor: pointer;
       border-radius: 10px;
     }
@@ -41,117 +41,62 @@
     .panel {
       display: none;
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80%; /* Adjust width as needed */
-      max-width: 600px; /* Adjust max-width as needed */
-      max-height: 80%; /* Adjust max-height as needed */
-      overflow-y: scroll; /* Enable scrolling if content exceeds panel height */
       background-color: rgba(177, 132, 96, 0.9); /* Semi-transparent white */
       padding: 20px;
       border-radius: 10px;
     }
 
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
+    #rulesPanel {
+      left: calc(100% + 20px); /* 20px gap from button */
+      top: 50%;
+      transform: translate(-100%, -50%);
     }
 
-    .close-btn {
-      cursor: pointer;
+    #newPanel {
+      left: calc(100% + 20px); /* 20px gap from button */
+      top: 50%;
+      transform: translate(-100%, -50%);
     }
-
-     .new-panel {
-     display: none;
-     position: absolute;
-     top: 50%;
-     left: 50%;
-     transform: translate(-50%, -50%);
-     width: 80%; /* Adjust width as needed */
-     max-width: 600px; /* Adjust max-width as needed */
-     max-height: 80%; /* Adjust max-height as needed */
-     overflow-y: scroll; /* Enable scrolling if content exceeds panel height */
-     background-color: rgba(177, 132, 96, 0.9); /* Semi-transparent white */
-     padding: 20px;
-    border-radius: 10px;
-   }
   </style>
 </head>
 <body>
-  <button id="rulesButton" onclick="togglePanel()">Rules</button>
-  <div class="panel" id="myPanel">
-    <div class="panel-header">
-      <div>- Rules -</div>
-      <div class="close-btn" onclick="togglePanel()">X</div>
+  <div class="button-container">
+    <button id="rulesButton" onclick="togglePanel()">Rules</button>
+    <div class="panel" id="rulesPanel">
+      <div class="panel-header">
+        <div>- Rules -</div>
+        <div class="close-btn" onclick="togglePanel()">X</div>
+      </div>
+      <div class="panel-content">
+        <p>NB (NoBlood): No CH tag shall be injured so much during a battle, that he/she will start bleeding.</p>
+        <p>RL (RoundLoss): No team shall go to a captured place during a battle, to get support, or move loot.</p>
+      </div>
     </div>
-    <div class="panel-content">
-      <p>NB (NoBlood): No CH tag shall be injured so much during a battle, that he/she will start bleeding.</p>
-      <p>RL (RoundLoss): No team shall go to a captured place during a battle, to get support, or move loot.</p>
+    <button id="newButton" onclick="toggleNewPanel()">New Panel</button>
+    <div class="panel" id="newPanel">
+      <div class="panel-header">
+        <div>- New Panel -</div>
+        <div class="close-btn" onclick="toggleNewPanel()">X</div>
+      </div>
+      <div class="panel-content">
+        <!-- Add your content for the new panel here -->
+        <p>This is the content of the new panel.</p>
+      </div>
     </div>
   </div>
-   <button id="newButton" onclick="toggleNewPanel()" style="margin-top: 50px;">New Panel</button>
-   <div class="new-panel" id="newPanel">
-   <div class="panel-header">
-     <div>- New Panel -</div>
-     <div class="close-btn" onclick="toggleNewPanel()">X</div>
-   </div>
-   <div class="panel-content">
-     <!-- Add your content for the new panel here -->
-     <p>This is the content of the new panel.</p>
-   </div>
- </div>
 
   <script>
-    // Check if panel should be hidden or shown on page load
-    document.addEventListener("DOMContentLoaded", function() {
-      var panel = document.getElementById('myPanel');
-      if (localStorage.getItem('panelVisible') === 'true') {
-        panel.style.display = 'block';
-      }
-    });
-
     function togglePanel() {
-      var panel = document.getElementById('myPanel');
-      if (panel.style.display === 'none') {
-        panel.style.display = 'block';
-        localStorage.setItem('panelVisible', 'true');
-      } else {
-        panel.style.display = 'none';
-        localStorage.setItem('panelVisible', 'false');
-      }
+      var panel = document.getElementById('rulesPanel');
+      panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+      localStorage.setItem('panelVisible', panel.style.display === 'block');
     }
 
-    // Calculate and set panel position based on button position
-    var button = document.getElementById('rulesButton');
-    var panel = document.getElementById('myPanel');
-    var buttonRect = button.getBoundingClientRect();
-    var panelWidth = panel.offsetWidth;
-    var panelHeight = panel.offsetHeight;
-    panel.style.left = buttonRect.right + 250 + 'px'; // Adjust as needed
-    panel.style.top = buttonRect.top + (button.offsetHeight - panelHeight) / 2 + 'px'; // Adjust as needed
-
-     function toggleNewPanel() {
-   var panel = document.getElementById('newPanel');
-   if (panel.style.display === 'none') {
-     panel.style.display = 'block';
-     localStorage.setItem('newPanelVisible', 'true');
-   } else {
-     panel.style.display = 'none';
-     localStorage.setItem('newPanelVisible', 'false');
-   }
- }
-
-  // Calculate and set new panel position based on button position
-  var newButton = document.getElementById('newButton');
-  var newPanel = document.getElementById('newPanel');
-  var newButtonRect = newButton.getBoundingClientRect();
-  var newPanelWidth = newPanel.offsetWidth;
-  var newPanelHeight = newPanel.offsetHeight;
-  newPanel.style.left = newButtonRect.right + 15 + 'px'; // Adjust as needed
-  newPanel.style.top = newButtonRect.top + (newButton.offsetHeight - newPanelHeight) / 2 + 'px'; // Adjust as needed
+    function toggleNewPanel() {
+      var panel = document.getElementById('newPanel');
+      panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+      localStorage.setItem('newPanelVisible', panel.style.display === 'block');
+    }
   </script>
 </body>
 </html>
