@@ -2,94 +2,131 @@
 <html lang="hu">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Custom Hosts</title>
-<style>
-body {
-    background-color: #333333; /* Dark Gray */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* Align items vertically */
-    margin: 0; /* Remove default margin */
-    margin-bottom: 0; /* Add this line to remove bottom margin */
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Hosts</title>
+    <style>
+        body {
+            background-color: #333333; /* Dark Gray */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Align items vertically */
+            margin: 0; /* Remove default margin */
+            margin-bottom: 0; /* Add this line to remove bottom margin */
+        }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 100px; /* Add padding around the container */
-    height: 100%; /* Set container height to 100% of viewport */
-    overflow-y: auto; /* Enable vertical scrolling */
-}
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 100px; /* Add padding around the container */
+            height: 100%; /* Set container height to 100% of viewport */
+            overflow-y: auto; /* Enable vertical scrolling */
+            position: relative; /* Position relative for absolute positioning of panel */
+        }
 
-.button {
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 10px 0; /* Add margin between buttons */
-    cursor: pointer;
-    border-radius: 10px;
-}
+        .button {
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0; /* Add margin between buttons */
+            cursor: pointer;
+            border-radius: 10px;
+        }
 
-.copy-button {
-    background-color: #55ACCF; /* Blue */
-}
+        .copy-button {
+            background-color: #55ACCF; /* Blue */
+        }
 
-.webstore-button {
-    background-color: #E4B260; /* Orange */
-}
-</style>
+        .webstore-button {
+            background-color: #E4B260; /* Orange */
+        }
+
+        /* Hidden panel styles */
+        .panel {
+            display: none;
+            position: absolute;
+            top: 0;
+            right: calc(100% + 20px); /* Position to the right of the button */
+            padding: 20px;
+            border-radius: 20px;
+            background-color: #FFFFFF; /* White */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+            z-index: 1; /* Ensure panel is above other elements */
+        }
+
+        .panel.active {
+            display: block; /* Show panel when active */
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <!-- Button to trigger copying -->
-    <button class="button copy-button" onclick="copyBTN()">Copy Button</button>
+        <!-- Button to trigger copying -->
+        <button class="button copy-button" onclick="copyBTN()">Copy Button</button>
 
-    <!-- Button to open webstore -->
-    <button class="button webstore-button" onclick="openWebstore()">BlobMC</button>
+        <!-- Button to show panel -->
+        <button class="button webstore-button" onclick="showPanel()">BlobMC</button>
 
-</div>
+        <!-- Hidden panel -->
+        <div class="panel" id="panel">
+            <span class="close-btn" onclick="hidePanel()">X</span>
+            <textarea id="panelText" rows="4" cols="50">This text can be edited.</textarea>
+        </div>
 
-</div>
+    </div>
 
-<script>
+    <script>
+        // Function to copy server IP
+        function copyBTN() {
+            var text = "Code";
 
-// Function to copy server IP
-function copyBTN() {
-    var text = "Code";
-  
-    // Create a temporary text area element
-    var tempTextArea = document.createElement("textarea");
-    tempTextArea.value = text;
-  
-    // Append the text area element to the body
-    document.body.appendChild(tempTextArea);
-  
-    // Select and copy the text from the text area element
-    tempTextArea.select();
-    document.execCommand("copy");
-  
-    // Remove the temporary text area element
-    document.body.removeChild(tempTextArea);
-  
-    // Alert the copied text
-    alert("Code copied!");
-}
+            // Create a temporary text area element
+            var tempTextArea = document.createElement("textarea");
+            tempTextArea.value = text;
 
-// Function to open webstore
-function openWebstore() {
-    window.open("https://blobmc.hu", "_blank");
-}
+            // Append the text area element to the body
+            document.body.appendChild(tempTextArea);
 
-</script>
+            // Select and copy the text from the text area element
+            tempTextArea.select();
+            document.execCommand("copy");
+
+            // Remove the temporary text area element
+            document.body.removeChild(tempTextArea);
+
+            // Alert the copied text
+            alert("Code copied!");
+        }
+
+        // Function to show panel
+        function showPanel() {
+            var panel = document.getElementById("panel");
+            panel.classList.add("active"); // Add "active" class to show panel
+        }
+
+        // Function to hide panel
+        function hidePanel() {
+            var panel = document.getElementById("panel");
+            panel.classList.remove("active"); // Remove "active" class to hide panel
+        }
+    </script>
 </body>
+
 </html>
