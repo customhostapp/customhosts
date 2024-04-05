@@ -39,7 +39,7 @@ body {
 }
 
 .copy-button {
-    background-color: #CC3116; /* Red */
+    background-color: #55ACCF; /* Blue */
 }
 
 .webstore-button {
@@ -52,10 +52,10 @@ body {
 <div class="container">
 
     <!-- Button to trigger copying -->
-    <button class="button copy-button" onclick="copyBTN()">Szerver IP cím másolása</button>
+    <button class="button copy-button" onclick="copyBTN()">Copy Button</button>
 
     <!-- Button to open webstore -->
-    <button class="button webstore-button" onclick="openWebstore()">BlobMC Webáruház</button>
+    <button class="button webstore-button" onclick="openWebstore()">BlobMC</button>
 
 </div>
 
@@ -65,11 +65,11 @@ body {
 
 // Function to copy server IP
 function copyBTN() {
-    var text = "195.228.230.105:25570";
+    var text = "Code";
   
     // Create a temporary text area element
     var tempTextArea = document.createElement("textarea");
-    tempTextArea.value = serverIp;
+    tempTextArea.value = text;
   
     // Append the text area element to the body
     document.body.appendChild(tempTextArea);
@@ -82,12 +82,12 @@ function copyBTN() {
     document.body.removeChild(tempTextArea);
   
     // Alert the copied text
-    alert("BlobMC szerver IP másolva, illeszd be ahova akarod!");
+    alert("Code copied!");
 }
 
 // Function to open webstore
 function openWebstore() {
-    window.open("https://blobmc-bolt.tebex.io", "_blank");
+    window.open("https://blobmc.hu", "_blank");
 }
 
 </script>
