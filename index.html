@@ -118,13 +118,13 @@
         // Function to show panel
         function showPanel() {
             var panel = document.getElementById("panel");
-            panel.style.display = "block"; // Show panel
+            panel.classList.add("active"); // Add "active" class to show panel
         }
 
         // Function to hide panel
         function hidePanel() {
             var panel = document.getElementById("panel");
-            panel.style.display = "none"; // Hide panel
+            panel.classList.remove("active"); // Remove "active" class to hide panel
         }
     </script>
 </body>
